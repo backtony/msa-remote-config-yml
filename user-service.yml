@@ -10,4 +10,6 @@ token:
   secret: user_token
 
 order_service:
-  url: http://127.0.0.1:8000/order-service/api/v1/%s/orders
+  # order-service는 유레카에 등록된 마이크로서비스 application name
+  # restTemplate은 이를 인식하기 위해 빈 설정시 @LoadBalanced 애노테이션을 붙여야 한다.
+  url: http://order-service/order-service/api/v1/%s/orders
