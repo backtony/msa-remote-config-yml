@@ -10,6 +10,11 @@ token:
   secret: user_token
 
 order_service:
-  # order-service는 유레카에 등록된 마이크로서비스 application name
-  # restTemplate은 이를 인식하기 위해 빈 설정시 @LoadBalanced 애노테이션을 붙여야 한다.
-  url: http://order-service/order-service/api/v1/%s/orders
+  # api-gateway service를 이용하는 방식
+  # url: http://127.0.0.1:8000/order-service/api/v1/%s/orders
+
+  # api-gateway를 이용하지 않는 방식
+  # http://127.0.0.1:8000 대신 유레카에 등록된 마이크로서비스 이름을 등록하면 api-gateway를 거치지 않고 유레카 서버를 통해 마이크로서비스의 위치를 알아내 바로 요청을 보낼 수 있다.
+  # discoveryService(localhost:8761) 에 접속해보면 등록된 이름이 보임 -> 대부분 application name의 대문자 형식
+  # 이를 restTemplate이 인식하도록 하기 위해서는 restTemplate 빈 등록 시 @LoadBalanced 애노테이션을 붙여야 한다.
+  url: http://ORDER-SERVICE/api/v1/%s/orders
